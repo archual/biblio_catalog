@@ -5,20 +5,21 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack --mode development --watch",
+    "devserver": "webpack-dev-server --open",
     "build": "webpack --mode production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/archual/project_fe_template"
+    "url": "git+https://github.com/archual/biblio_catalog"
   },
   "keywords": [],
   "author": "Archual",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/archual/project_fe_template/issues"
+    "url": "https://github.com/archual/biblio_catalog/issues"
   },
-  "homepage": "https://github.com/archual/project_fe_template#readme",
+  "homepage": "https://github.com/archual/biblio_catalog#readme",
   "devDependencies": {
     "@babel/core": "^7.4.3",
     "autoprefixer": "^9.5.1",
@@ -35,6 +36,10 @@
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "webpack": "^4.30.0",
-    "webpack-cli": "^3.3.0"
+    "webpack-cli": "^3.3.0",
+    "webpack-dev-server": "^3.3.1"
+  },
+  "dependencies": {
+    "font-awesome": "^4.7.0"
   }
 }

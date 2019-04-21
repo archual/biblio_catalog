@@ -9,6 +9,12 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     filename: "[name].[chunkhash].js"
   },
+  devtool: "inline-source-map",
+  devServer: {
+    contentBase: path.join(__dirname, "dist"),
+    compress: true,
+    port: 9000
+  },
   module: {
     rules: [
       {
@@ -26,6 +32,31 @@ module.exports = {
           "css-loader",
           "postcss-loader",
           "sass-loader"
+        ]
+      },
+      {
+        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        exclude: [/images/],
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              name: "[name].[ext]",
+              outputPath: "fonts/"
+            }
+          }
+        ]
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              name: "[name].[ext]",
+              outputPath: "images/"
+            }
+          }
         ]
       }
     ]

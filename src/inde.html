@@ -1,0 +1,39 @@
+Skip to content Search or jump to… Pull requests Issues Marketplace Explore
+@archual 1 0 0 archual/jobLead_test_task Code Issues 0 Pull requests 0 Projects
+0 Wiki Insights Settings jobLead_test_task/src/index.html @arcbual-golos
+arcbual-golos Add content, styles, logic 2d8bbfe 11 hours ago 102 lines (99
+sloc) 3.71 KB
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Test task from Job Leads</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/purecss@1.0.0/build/pure-min.css"
+      integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="<%=htmlWebpackPlugin.files.chunks.main.css %>"
+    />
+    <link rel="shortcut icon" type="image/png" href="/favicon.png" />
+  </head>
+  <body>
+    <header class="general__header">
+      <a href="#" class="logo" title="Homepage">
+        <img src=<%=require("./images/logo_JL.svg")%> alt="Job leads" />
+      </a>
+    </header>
+    <main></main>
+
+    <footer class="container footer">
+      <p>©2019 Catalog of mine books</p>
+    </footer>
+
+    <script src="<%= htmlWebpackPlugin.files.chunks.main.entry %>"></script>
+  </body>
+</html>
