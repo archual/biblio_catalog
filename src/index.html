@@ -11,19 +11,7 @@
     <link rel="shortcut icon" type="image/png" href="/favicon.png" />
   </head>
   <body>
-    <header class="general__header">
-      <a href="#" class="logo" title="Homepage">
-        <img src=<%=require("./images/logo.jpeg")%> alt="Job leads" />
-      </a>
-    </header>
-    <main>
-      <div id="catalog-app"></div>
-    </main>
-
-    <footer class="container footer">
-      <p>©2019 Catalog of mine books</p>
-    </footer>
-
+    <div id="catalog-app"></div>
     <script src="<%= htmlWebpackPlugin.files.chunks.main.entry %>"></script>
   </body>
 </html>

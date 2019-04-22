@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter } from "react-router-dom";
+import Header from "./layout/header";
+import Main from "./layout/main";
 
 class App extends Component {
   state = {};
