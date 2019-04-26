@@ -5,7 +5,7 @@ import React, { Component } from "react";
 // onSort: function
 
 class TableHeader extends Component {
-  raiseSort = path => {
+  sort = path => {
     const sortColumn = { ...this.props.sortColumn };
     if (sortColumn.path === path)
       sortColumn.order = sortColumn.order === "asc" ? "desc" : "asc";
@@ -32,7 +32,7 @@ class TableHeader extends Component {
             <th
               className="clickable"
               key={column.path || column.key}
-              onClick={() => this.raiseSort(column.path)}
+              onClick={() => this.sort(column.path)}
             >
               {column.label} {this.renderSortIcon(column)}
             </th>

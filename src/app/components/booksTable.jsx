@@ -7,14 +7,14 @@ class BooksTable extends Component {
     {
       path: "title",
       label: "Title",
-      content: Book => <Link to={`/Books/${Book._id}`}>{Book.title}</Link>
+      content: book => <Link to={`/books/${book._id}`}>{book.title}</Link>
     },
     { path: "genre.name", label: "Genre" },
     {
       key: "delete",
-      content: Book => (
+      content: book => (
         <button
-          onClick={() => this.props.onDelete(Book)}
+          onClick={() => this.props.onDelete(book)}
           className="btn btn-danger btn-sm"
         >
           Delete
@@ -24,12 +24,12 @@ class BooksTable extends Component {
   ];
 
   render() {
-    const { Books, onSort, sortColumn } = this.props;
+    const { books, onSort, sortColumn } = this.props;
 
     return (
       <Table
         columns={this.columns}
-        data={Books}
+        data={books}
         sortColumn={sortColumn}
         onSort={onSort}
       />

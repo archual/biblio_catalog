@@ -2,14 +2,16 @@ import React, { Component } from "react";
 import BooksTable from "./booksTable";
 import ListGroup from "./common/listGroup";
 import Pagination from "./common/pagination";
+import SearchBox from "./common/searchBox";
 import { getBooks } from "../services/fakeBookService";
 import { getGenres } from "../services/fakeGenreService";
 import { paginate } from "../utils/paginate";
+
 import _ from "lodash";
 
 class Books extends Component {
   state = {
-    Books: [],
+    books: [],
     genres: [],
     currentPage: 1,
     pageSize: 4,
@@ -17,23 +19,22 @@ class Books extends Component {
   };
 
   componentDidMount() {
-    debugger;
     const genres = [{ _id: "", name: "All Genres" }, ...getGenres()];
 
-    this.setState({ Books: getBooks(), genres });
+    this.setState({ books: getBooks(), genres });
   }
 
-  handleDelete = Book => {
-    const Books = this.state.Books.filter(m => m._id !== Book._id);
-    this.setState({ Books });
+  handleDelete = book => {
+    const books = this.state.Books.filter(m => m._id !== book._id);
+    this.setState({ books });
   };
 
   handleLike = Book => {
-    const Books = [...this.state.Books];
-    const index = Books.indexOf(Book);
-    Books[index] = { ...Books[index] };
-    Books[index].liked = !Books[index].liked;
-    this.setState({ Books });
+    const books = [...this.state.books];
+    const index = books.indexOf(Book);
+    books[index] = { ...books[index] };
+    books[index].liked = !books[index].liked;
+    this.setState({ books });
   };
 
   handlePageChange = page => {
@@ -42,6 +43,10 @@ class Books extends Component {
 
   handleGenreSelect = genre => {
     this.setState({ selectedGenre: genre, currentPage: 1 });
+  };
+
+  handleSearch = query => {
+    this.setState({ searchQuery: query, selectedGenre: null, currentPage: 1 });
   };
 
   handleSort = sortColumn => {
@@ -54,28 +59,32 @@ class Books extends Component {
       currentPage,
       sortColumn,
       selectedGenre,
-      Books: allBooks
+      searchQuery,
+      books: allBooks
     } = this.state;
 
-    const filtered =
-      selectedGenre && selectedGenre._id
-        ? allBooks.filter(m => m.genre._id === selectedGenre._id)
-        : allBooks;
+    let filtered = allBooks;
+    if (searchQuery)
+      filtered = allBooks.filter(m =>
+        m.title.toLowerCase().startsWith(searchQuery.toLowerCase())
+      );
+    else if (selectedGenre && selectedGenre._id)
+      filtered = allBooks.filter(m => m.genre._id === selectedGenre._id);
 
     const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
 
-    const Books = paginate(sorted, currentPage, pageSize);
+    const books = paginate(sorted, currentPage, pageSize);
 
-    return { totalCount: filtered.length, data: Books };
+    return { totalCount: filtered.length, data: books };
   };
 
   render() {
-    const { length: count } = this.state.Books;
-    const { pageSize, currentPage, sortColumn } = this.state;
+    const { length: count } = this.state.books;
+    const { pageSize, currentPage, sortColumn, searchQuery } = this.state;
 
     if (count === 0) return <p>There are no Books in the database.</p>;
 
-    const { totalCount, data: Books } = this.getPagedData();
+    const { totalCount, data: books } = this.getPagedData();
 
     return (
       <div className="row">
@@ -87,9 +96,10 @@ class Books extends Component {
           />
         </div>
         <div className="col">
-          <p>Showing {totalCount} Books in the database.</p>
+          <p>Showing {totalCount} books in the database.</p>
+          <SearchBox value={searchQuery} onChange={this.handleSearch} />
           <BooksTable
-            Books={Books}
+            books={books}
             sortColumn={sortColumn}
             onLike={this.handleLike}
             onDelete={this.handleDelete}

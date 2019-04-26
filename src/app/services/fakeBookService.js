@@ -1,6 +1,6 @@
 import * as genresAPI from "./fakeGenreService";
 
-const Books = [
+const books = [
   {
     _id: "5b21ca3eeb7f6fbccd471815",
     isbn: "9781593275846",
@@ -119,28 +119,28 @@ const Books = [
 ];
 
 export function getBooks() {
-  return Books;
+  return books;
 }
 
 export function getBook(id) {
-  return Books.find(m => m._id === id);
+  return books.find(m => m._id === id);
 }
 
-export function saveBook(Book) {
-  let BookInDb = Books.find(m => m._id === Book._id) || {};
-  BookInDb.name = Book.name;
-  BookInDb.genre = genresAPI.genres.find(g => g._id === Book.genreId);
+export function saveBook(book) {
+  let bookInDb = books.find(m => m._id === book._id) || {};
+  bookInDb.title = book.title;
+  bookInDb.genre = genresAPI.genres.find(g => g._id === book.genreId);
 
-  if (!BookInDb._id) {
-    BookInDb._id = Date.now();
-    Books.push(BookInDb);
+  if (!bookInDb._id) {
+    bookInDb._id = Date.now();
+    books.push(bookInDb);
   }
 
-  return BookInDb;
+  return bookInDb;
 }
 
 export function deleteBook(id) {
-  let BookInDb = Books.find(m => m._id === id);
-  Books.splice(Books.indexOf(BookInDb), 1);
-  return BookInDb;
+  let bookInDb = books.find(m => m._id === id);
+  books.splice(books.indexOf(bookInDb), 1);
+  return bookInDb;
 }
