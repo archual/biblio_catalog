@@ -9,31 +9,26 @@ import { paginate } from "../utils/paginate";
 
 import _ from "lodash";
 
+const allGenres = { _id: "", name: "All Genres" };
+
 class Books extends Component {
   state = {
     books: [],
     genres: [],
+    selectedGenre: allGenres,
     currentPage: 1,
     pageSize: 4,
     sortColumn: { path: "title", order: "asc" }
   };
 
   componentDidMount() {
-    const genres = [{ _id: "", name: "All Genres" }, ...getGenres()];
+    const genres = [allGenres, ...getGenres()];
 
     this.setState({ books: getBooks(), genres });
   }
 
   handleDelete = book => {
-    const books = this.state.Books.filter(m => m._id !== book._id);
-    this.setState({ books });
-  };
-
-  handleLike = Book => {
-    const books = [...this.state.books];
-    const index = books.indexOf(Book);
-    books[index] = { ...books[index] };
-    books[index].liked = !books[index].liked;
+    const books = this.state.books.filter(m => m._id !== book._id);
     this.setState({ books });
   };
 
