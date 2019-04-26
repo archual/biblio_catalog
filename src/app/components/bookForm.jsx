@@ -17,6 +17,8 @@ class BookForm extends Form {
   schema = {
     _id: Joi.string(),
     title: Joi.string()
+      .min(3)
+      .max(30)
       .required()
       .label("Title"),
     genreId: Joi.string()

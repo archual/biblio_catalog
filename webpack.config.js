@@ -1,7 +1,12 @@
 const path = require("path");
+const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
+
+var devFlagPlugin = new webpack.DefinePlugin({
+  DEV_ENV: JSON.stringify(JSON.parse(process.env.DEBUG || "false"))
+});
 
 module.exports = {
   entry: { main: "./src/index.js" },
@@ -72,7 +77,8 @@ module.exports = {
       hash: true,
       template: "./src/index.html",
       filename: "index.html"
-    })
+    }),
+    devFlagPlugin
   ],
   resolve: {
     extensions: [".js", ".jsx"]
