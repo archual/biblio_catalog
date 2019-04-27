@@ -4,10 +4,10 @@ import BooksTable from "./booksTable";
 import ListGroup from "./common/listGroup";
 import Pagination from "./common/pagination";
 import SearchBox from "./common/searchBox";
-import { getBooks } from "../services/fakeBookService";
+// import { getBooks } from "../services/fakeBookService";
 import { getGenres } from "../services/fakeGenreService";
 import { paginate } from "../utils/paginate";
-import { setBooks } from "../actions/booksActions";
+import { getBooks } from "../actions/booksActions";
 import { setGenres, setSelectedGenre } from "../actions/genresActions";
 import {
   setSortColumn,
@@ -22,9 +22,8 @@ const allGenres = { _id: "", name: "All Genres" };
 class Books extends Component {
   componentDidMount() {
     const genres = [{ _id: "", name: "All Genres" }, ...getGenres()];
-    const books = getBooks();
+    this.props.getBooks();
 
-    this.props.setBooks(books);
     this.props.setGenres(genres);
   }
 
@@ -143,7 +142,7 @@ const mapStateToProps = store => {
 };
 
 const mapDispatchToProps = {
-  setBooks,
+  getBooks,
   setSortColumn,
   setCurrentPage,
   setGenres,

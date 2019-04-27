@@ -11,6 +11,44 @@ export default function booksReducer(state = booksInitialState, action) {
         }
       });
 
+    case types.SET_BOOK_FORM_DATA:
+      return update(state, {
+        data: {
+          $set: action.payload
+        }
+      });
+
+    case types.SET_BOOK_FORM_ERRORS:
+      return update(state, {
+        errors: {
+          $set: action.payload
+        }
+      });
+
+    case types.SAVE_BOOK_REQUEST:
+      return update(state, {
+        loading: {
+          $set: true
+        }
+      });
+
+    case types.SAVE_BOOK_SUCCESS:
+      return update(state, {
+        loading: {
+          $set: false
+        }
+      });
+
+    case types.SAVE_BOOK_FAILURE:
+      return update(state, {
+        loading: {
+          $set: false
+        },
+        error: {
+          $set: action.payload
+        }
+      });
+
     default:
       return state;
   }

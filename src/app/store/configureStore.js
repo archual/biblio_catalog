@@ -1,12 +1,13 @@
 import { createStore, applyMiddleware } from "redux";
 import thunkMiddleware from "redux-thunk";
 import compose from "compose-function";
-import { loadLocalState, saveLocalState } from "../utils/localStorage";
-import reducers from "../reducers";
 import throttle from "lodash/throttle";
+import reducers from "../reducers";
+import { loadLocalState, saveLocalState } from "../utils/localStorage";
 
-const persistedState = loadLocalState() || {};
-// const persistedState = {};
+// const persistedState = loadLocalState() || {};
+const persistedState = {};
+
 const composeEnhancers = DEV_ENV
   ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
   : compose;

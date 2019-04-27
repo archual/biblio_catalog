@@ -1,5 +1,13 @@
 export const booksInitialState = {
-  books: []
+  books: [],
+  data: {
+    _id: "",
+    title: "",
+    genreId: "",
+    image: "",
+    authors: []
+  },
+  errors: {}
 };
 
 export const tableInitialState = {

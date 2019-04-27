@@ -2,16 +2,17 @@ import React, { Component } from "react";
 import Joi from "joi-browser";
 import Input from "./input";
 import Select from "./select";
+import Dropzone from "./dropZone";
 
 class Form extends Component {
-  state = {
-    data: {},
-    errors: {}
-  };
+  // state = {
+  //   data: {},
+  //   errors: {}
+  // };
 
   validate = () => {
     const options = { abortEarly: false };
-    const { error } = Joi.validate(this.state.data, this.schema, options);
+    const { error } = Joi.validate(this.props.data, this.schema, options);
     if (!error) return null;
 
     const errors = {};
@@ -30,7 +31,9 @@ class Form extends Component {
     e.preventDefault();
 
     const errors = this.validate();
-    this.setState({ errors: errors || {} });
+    // TODO
+    // this.setState({ errors: errors || {} });
+    this.doUpdateErrors(errors || {});
     if (errors) return;
 
     this.doSubmit();
@@ -42,10 +45,13 @@ class Form extends Component {
     if (errorMessage) errors[input.name] = errorMessage;
     else delete errors[input.name];
 
-    const data = { ...this.state.data };
+    const data = { ...this.props.data };
     data[input.name] = input.value;
 
-    this.setState({ data, errors });
+    // this.setState({ data, errors });
+
+    this.doUpdateData(data);
+    this.doUpdateErrors(errors || {});
   };
 
   renderButton(label) {
@@ -57,7 +63,7 @@ class Form extends Component {
   }
 
   renderSelect(name, label, options) {
-    const { data, errors } = this.state;
+    const { data, errors } = this.props;
 
     return (
       <Select
@@ -71,18 +77,42 @@ class Form extends Component {
     );
   }
 
-  renderInput(name, label, type = "text") {
-    const { data, errors } = this.state;
+  renderInput(name, label, value, type = "text") {
+    const { data, errors } = this.props;
 
     return (
       <Input
         type={type}
         name={name}
-        value={data[name]}
+        value={value || data[name]}
         label={label}
         onChange={this.handleChange}
         error={errors[name]}
       />
+    );
+  }
+
+  rednderDropzone(
+    name,
+    label,
+    apiUrl,
+    handleAddFile,
+    handleUploaded,
+    handleUploadError,
+    handleThumbnailCreated
+  ) {
+    return (
+      <React.Fragment>
+        <label>{label}</label>
+        <Dropzone
+          fieldName={name}
+          apiUrl={apiUrl}
+          handleAddFile={handleAddFile}
+          handleUploaded={handleUploaded}
+          handleError={handleUploadError}
+          handleThumbnailCreated={handleThumbnailCreated}
+        />
+      </React.Fragment>
     );
   }
 }
