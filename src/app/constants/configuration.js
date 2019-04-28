@@ -3,7 +3,7 @@ export const booksInitialState = {
   data: {
     _id: "",
     title: "",
-    genreId: "",
+    genreId: {},
     image: "",
     authors: []
   },
@@ -23,7 +23,13 @@ export const genresInitialState = {
 };
 
 export const authorsInitialState = {
-  authors: []
+  authors: [],
+  data: {
+    _id: "",
+    name: "",
+    surname: ""
+  },
+  errors: {}
 };
 
 export const initialState = {

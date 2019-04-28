@@ -13,14 +13,7 @@ import {
 
 class BookForm extends Form {
   state = {
-    data: {
-      title: "",
-      genreId: "",
-      image: "",
-      authors: []
-    },
-    genres: [],
-    errors: {}
+    genres: []
   };
 
   schema = {
@@ -49,38 +42,6 @@ class BookForm extends Form {
 
     this.props.getBook(bookId);
   }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.data.authors === this.props.data.authors) {
-      return;
-    }
-
-    this.updateJoiSchema();
-  }
-
-  updateJoiSchema = () => {
-    const { authors } = this.props.data;
-    const athoursSchema = {};
-
-    authors &&
-      authors.length &&
-      authors.forEach((author, index) => {
-        if (index === 0) {
-          athoursSchema[`author-${index}`] = Joi.string()
-            .min(3)
-            .max(20)
-            .required()
-            .label(`Author-${index}`);
-        } else {
-          athoursSchema[`author-${index}`] = Joi.string()
-            .min(3)
-            .max(20)
-            .label(`Author-${index}`);
-        }
-      });
-
-    this.schema = { ...{}, ...this.schema, ...athoursSchema };
-  };
 
   doUpdateData = data => {
     this.props.updateFormData(data);
@@ -128,11 +89,7 @@ class BookForm extends Form {
             this.handleUploadError,
             this.handleThumbnailCreated
           )}
-          {book.authors.map((author, index) => {
-            <div className="form-group">
-              this.renderInput(`author-${index}`, "", );
-            </div>;
-          })}
+          {this.renderSelectOrAdd("authors", "Authors")}
           {this.renderSelect("genreId", "Genre", this.state.genres)}
           {this.renderButton("Save")}
         </form>

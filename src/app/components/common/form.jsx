@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Joi from "joi-browser";
 import Input from "./input";
 import Select from "./select";
+import SelectOrAdd from "./selectOrAdd";
 import Dropzone from "./dropZone";
 
 class Form extends Component {
@@ -72,6 +73,21 @@ class Form extends Component {
         label={label}
         options={options}
         onChange={this.handleChange}
+        error={errors[name]}
+      />
+    );
+  }
+
+  renderSelectOrAdd(name, label, options) {
+    const { data, errors } = this.props;
+
+    return (
+      <SelectOrAdd
+        name={name}
+        value={data[name]}
+        label={label}
+        options={options}
+        handleChange={this.handleChange}
         error={errors[name]}
       />
     );

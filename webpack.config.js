@@ -12,13 +12,20 @@ module.exports = {
   entry: { main: "./src/index.js" },
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "[name].[chunkhash].js"
+    filename: "[name].[chunkhash].js",
+    publicPath: "/"
   },
   devtool: "inline-source-map",
   devServer: {
     contentBase: path.join(__dirname, "dist"),
-    historyApiFallback: true,
+    historyApiFallback: {
+      rewrites: [
+        { from: /^\/$/, to: "/index.html" }
+        // { from: /^\/books\//, to: "/index.html" }
+      ]
+    },
     compress: true,
+    overlay: true,
     port: 9001
   },
   module: {
