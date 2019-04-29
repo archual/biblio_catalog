@@ -30,6 +30,11 @@ const Header = () => {
               Books
             </NavLink>
           </li>
+          <li className="nav-item">
+            <NavLink className="nav-link" to="/authors">
+              Authors
+            </NavLink>
+          </li>
         </ul>
       </div>
     </nav>

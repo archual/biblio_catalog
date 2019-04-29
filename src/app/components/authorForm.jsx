@@ -41,8 +41,6 @@ class AuthorForm extends Form {
 
   doSubmit = () => {
     this.props.saveAuthor(this.props.data);
-
-    this.props.history.push("/authors");
   };
 
   render() {

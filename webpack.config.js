@@ -18,12 +18,7 @@ module.exports = {
   devtool: "inline-source-map",
   devServer: {
     contentBase: path.join(__dirname, "dist"),
-    historyApiFallback: {
-      rewrites: [
-        { from: /^\/$/, to: "/index.html" }
-        // { from: /^\/books\//, to: "/index.html" }
-      ]
-    },
+    historyApiFallback: true,
     compress: true,
     overlay: true,
     port: 9001

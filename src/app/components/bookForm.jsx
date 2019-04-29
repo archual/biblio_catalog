@@ -2,7 +2,6 @@ import React from "react";
 import Joi from "joi-browser";
 import Form from "./common/form";
 import { connect } from "react-redux";
-// import { getBook, saveBook } from "../services/fakeBookService";
 import { getGenres } from "../services/fakeGenreService";
 import {
   getBook,
@@ -27,8 +26,7 @@ class BookForm extends Form {
       .required()
       .label("Genre"),
     image: Joi.any().label("Image"),
-    authors: Joi.string()
-      .min(3)
+    authors: Joi.any()
       .required()
       .label("Authors")
   };
@@ -89,8 +87,8 @@ class BookForm extends Form {
             this.handleUploadError,
             this.handleThumbnailCreated
           )}
-          {this.renderSelectOrAdd("authors", "Authors")}
           {this.renderSelect("genreId", "Genre", this.state.genres)}
+          {this.renderSelect("authors", "Authors", this.state.genres)}
           {this.renderButton("Save")}
         </form>
       </div>

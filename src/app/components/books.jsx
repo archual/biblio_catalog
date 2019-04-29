@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import BooksTable from "./booksTable";
 import ListGroup from "./common/listGroup";
 import Pagination from "./common/pagination";
@@ -105,11 +106,15 @@ class Books extends Component {
         </div>
         <div className="col">
           <p>Showing {totalCount} books in the database.</p>
-          <SearchBox value={searchQuery} onChange={this.handleSearch} />
+          <div className="form-row align-items-center">
+            <SearchBox value={searchQuery} onChange={this.handleSearch} />
+            <Link className="btn btn-primary" to="/books/new">
+              Add new
+            </Link>
+          </div>
           <BooksTable
             books={books}
             sortColumn={sortColumn}
-            onLike={this.handleLike}
             onDelete={this.handleDelete}
             onSort={this.handleSort}
           />

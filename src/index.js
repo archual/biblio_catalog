@@ -1,7 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter } from "react-router-dom";
+import { Router } from "react-router-dom";
 import { Provider } from "react-redux";
+import history from "./app/utils/history";
 import registerServiceWorker from "./registerServiceWorker";
 import configureStore from "./app/store/configureStore";
 import App from "./app/App";
@@ -12,9 +13,9 @@ import "./vendor/dropzone.min.css";
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
+    <Router history={history}>
       <App />
-    </BrowserRouter>
+    </Router>
   </Provider>,
   document.getElementById("catalog-app")
 );

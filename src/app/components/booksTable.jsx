@@ -5,9 +5,16 @@ import Table from "./common/table";
 class BooksTable extends Component {
   columns = [
     {
+      path: "image",
+      label: "Image",
+      content: book =>
+        book.image ? <img src={book.image} alt={book.title} /> : null
+    },
+    {
       path: "title",
       label: "Title",
-      content: book => <Link to={`/books/${book._id}`}>{book.title}</Link>
+      content: book => <Link to={`/books/${book._id}`}>{book.title}</Link>,
+      sorting: true
     },
     { path: "genre.name", label: "Genre" },
     {

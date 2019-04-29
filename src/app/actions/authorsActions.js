@@ -1,4 +1,5 @@
 import * as types from "../constants/ActionTypes";
+import history from "../utils/history";
 
 import {
   getAuthor as getAuthorFake,
@@ -47,6 +48,7 @@ export function saveAuthor(author) {
     setTimeout(() => {
       saveAuthorFake(author);
       dispatch(success);
+      history.push("/authors");
     }, 500);
   };
 }
@@ -74,7 +76,7 @@ export function setFormData(author) {
     const data = {
       _id: author._id,
       name: author.name,
-      surname: author.surname._id
+      surname: author.surname
     };
     dispatch(updateFormData(data));
   };

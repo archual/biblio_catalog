@@ -7,6 +7,8 @@ const books = [
     title: "Eloquent JavaScript, Second Edition",
     subtitle: "A Modern Introduction to Programming",
     genre: { _id: "5b21ca3eeb7f6fbccd471820", name: "Programming" },
+    image:
+      "https://images-na.ssl-images-amazon.com/images/I/51I9naPg55L._SX376_BO1,204,203,200_.jpg",
     authors: [
       { _id: "5b21ca3eeb7f6fbccd471850", name: "Marijn", surname: "Haverbeke" },
       { _id: "5b21ca3eeb7f6fbccd471851", name: "Addy", surname: "Osmani" }
@@ -41,6 +43,7 @@ const books = [
     title: "Speaking JavaScript",
     subtitle: "An In-Depth Guide for Programmers",
     genre: { _id: "5b21ca3eeb7f6fbccd471820", name: "Programming" },
+    image: "https://cdn1.ozone.ru/multimedia/c1200/1010617388.jpg",
     authors: [
       { _id: "5b21ca3eeb7f6fbccd471852", name: "Axel", surname: "Rauschmayer" }
     ],

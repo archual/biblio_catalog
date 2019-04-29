@@ -18,8 +18,9 @@ export function getAuthor(id) {
 }
 
 export function saveAuthor(author) {
-  let authorInDb = author.find(m => m._id === author._id) || {};
-  authorInDb.title = author.title;
+  let authorInDb = authors.find(m => m._id === author._id) || {};
+  authorInDb.name = author.name;
+  authorInDb.surname = author.surname;
 
   if (!authorInDb._id) {
     authorInDb._id = Date.now();
