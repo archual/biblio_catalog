@@ -9,9 +9,27 @@ class SearchBox extends Component {
   handleChange = event => {
     const { value } = event.currentTarget;
 
-    this.setState({ value: value });
+    this.setState({ value });
     this.props.onChange(value);
   };
+
+  componentDidMount() {
+    this._setValueFromProps();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.value === this.props.value) {
+      return;
+    }
+
+    this._setValueFromProps();
+  }
+
+  _setValueFromProps() {
+    const { value } = this.props;
+
+    this.setState({ value });
+  }
 
   render() {
     const { value } = this.state;

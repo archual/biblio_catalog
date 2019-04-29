@@ -7,7 +7,10 @@ const books = [
     title: "Eloquent JavaScript, Second Edition",
     subtitle: "A Modern Introduction to Programming",
     genre: { _id: "5b21ca3eeb7f6fbccd471820", name: "Programming" },
-    author: "Marijn Haverbeke",
+    authors: [
+      { _id: "5b21ca3eeb7f6fbccd471850", name: "Marijn", surname: "Haverbeke" },
+      { _id: "5b21ca3eeb7f6fbccd471851", name: "Addy", surname: "Osmani" }
+    ],
     published: "2014-12-14T00:00:00.000Z",
     publisher: "No Starch Press",
     pages: 472,
@@ -21,7 +24,9 @@ const books = [
     title: "Learning JavaScript Design Patterns",
     subtitle: "A JavaScript and jQuery Developer's Guide",
     genre: { _id: "5b21ca3eeb7f6fbccd471820", name: "Programming" },
-    author: "Addy Osmani",
+    authors: [
+      { _id: "5b21ca3eeb7f6fbccd471851", name: "Addy", surname: "Osmani" }
+    ],
     published: "2012-07-01T00:00:00.000Z",
     publisher: "O'Reilly Media",
     pages: 254,
@@ -36,7 +41,9 @@ const books = [
     title: "Speaking JavaScript",
     subtitle: "An In-Depth Guide for Programmers",
     genre: { _id: "5b21ca3eeb7f6fbccd471820", name: "Programming" },
-    author: "Axel Rauschmayer",
+    authors: [
+      { _id: "5b21ca3eeb7f6fbccd471852", name: "Axel", surname: "Rauschmayer" }
+    ],
     published: "2014-02-01T00:00:00.000Z",
     publisher: "O'Reilly Media",
     pages: 460,
@@ -51,7 +58,9 @@ const books = [
     subtitle:
       "Robust Web Architecture with Node, HTML5, and Modern JS Libraries",
     genre: { _id: "5b21ca3eeb7f6fbccd471820", name: "Programming" },
-    author: "Eric Elliott",
+    authors: [
+      { _id: "5b21ca3eeb7f6fbccd471853", name: "Eric", surname: "Elliott" }
+    ],
     published: "2014-07-01T00:00:00.000Z",
     publisher: "O'Reilly Media",
     pages: 254,
@@ -65,7 +74,9 @@ const books = [
     title: "Understanding ECMAScript 6",
     subtitle: "The Definitive Guide for JavaScript Developers",
     genre: { _id: "5b21ca3eeb7f6fbccd471820", name: "Programming" },
-    author: "Nicholas C. Zakas",
+    authors: [
+      { _id: "5b21ca3eeb7f6fbccd471854", name: "Nicholas", surname: "C. Zakas" }
+    ],
     published: "2016-09-03T00:00:00.000Z",
     publisher: "No Starch Press",
     pages: 352,
@@ -79,7 +90,9 @@ const books = [
     title: "You Don't Know JS",
     subtitle: "ES6 & Beyond",
     genre: { _id: "5b21ca3eeb7f6fbccd471820", name: "Programming" },
-    author: "Kyle Simpson",
+    authors: [
+      { _id: "5b21ca3eeb7f6fbccd471855", name: "Kyle", surname: "Simpson" }
+    ],
     published: "2015-12-27T00:00:00.000Z",
     publisher: "O'Reilly Media",
     pages: 278,
@@ -94,7 +107,13 @@ const books = [
     title: "Git Pocket Guide",
     subtitle: "A Working Introduction",
     genre: { _id: "5b21ca3eeb7f6fbccd471820", name: "Programming" },
-    author: "Richard E. Silverman",
+    authors: [
+      {
+        _id: "5b21ca3eeb7f6fbccd471856",
+        name: "Richard",
+        surname: "E. Silverman"
+      }
+    ],
     published: "2013-08-02T00:00:00.000Z",
     publisher: "O'Reilly Media",
     pages: 234,
@@ -108,7 +127,13 @@ const books = [
     title: "Designing Evolvable Web APIs with ASP.NET",
     subtitle: "Harnessing the Power of the Web",
     genre: { _id: "5b21ca3eeb7f6fbccd471820", name: "Programming" },
-    author: "Glenn Block, et al.",
+    authors: [
+      {
+        _id: "5b21ca3eeb7f6fbccd471857",
+        name: "Glenn",
+        surname: "Block, et al."
+      }
+    ],
     published: "2014-04-07T00:00:00.000Z",
     publisher: "O'Reilly Media",
     pages: 538,
