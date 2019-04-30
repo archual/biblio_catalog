@@ -98,19 +98,19 @@ export function updateFormErrors(errors) {
 
 export function request() {
   return {
-    type: types.SAVE_AUTHOR_REQUEST
+    type: types.AUTHOR_REQUEST
   };
 }
 
 export function success() {
   return {
-    type: types.SAVE_AUTHOR_SUCCESS
+    type: types.AUTHOR_SUCCESS
   };
 }
 
 export function failure(error) {
   return {
-    type: types.SAVE_AUTHOR_FAILURE,
+    type: types.AUTHOR_FAILURE,
     payload: error
   };
 }

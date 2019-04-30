@@ -2,7 +2,9 @@ import React from "react";
 import Joi from "joi-browser";
 import Form from "./common/form";
 import { connect } from "react-redux";
-import { getGenres } from "../services/fakeGenreService";
+import { getGenres } from "../actions/genresActions";
+import { getAuthors } from "../actions/authorsActions";
+
 import {
   getBook,
   updateFormData,
@@ -11,10 +13,6 @@ import {
 } from "../actions/booksActions";
 
 class BookForm extends Form {
-  state = {
-    genres: []
-  };
-
   schema = {
     _id: Joi.string(),
     title: Joi.string()
@@ -26,14 +24,15 @@ class BookForm extends Form {
       .required()
       .label("Genre"),
     image: Joi.any().label("Image"),
-    authors: Joi.any()
+    authors: Joi.array()
+      .min(1)
       .required()
       .label("Authors")
   };
 
   componentDidMount() {
-    const genres = getGenres();
-    this.setState({ genres });
+    this.props.getGenres();
+    this.props.getAuthors();
 
     const bookId = this.props.match.params.id;
     if (bookId === "new") return;
@@ -71,6 +70,15 @@ class BookForm extends Form {
     console.log("file handleThumbnailCreated", file);
   };
 
+  _getAuthorsOptions(authors) {
+    return authors.map(author => {
+      return {
+        _id: author._id,
+        name: `${author.name} ${author.surname}`
+      };
+    });
+  }
+
   render() {
     const { data: book } = this.props;
     return (
@@ -87,8 +95,13 @@ class BookForm extends Form {
             this.handleUploadError,
             this.handleThumbnailCreated
           )}
-          {this.renderSelect("genreId", "Genre", this.state.genres)}
-          {this.renderSelect("authors", "Authors", this.state.genres)}
+          {this.renderSelect("genreId", "Genre", this.props.genres)}
+          {this.renderMultiSelect(
+            "authors",
+            "Authors",
+            this._getAuthorsOptions(this.props.authors),
+            6
+          )}
           {this.renderButton("Save")}
         </form>
       </div>
@@ -99,15 +112,19 @@ class BookForm extends Form {
 const mapStateToProps = store => {
   const { data, errors } = store.booksState;
   const { genres } = store.genresState;
+  const { authors } = store.authorsState;
 
   return {
     data,
     errors,
-    genres
+    genres,
+    authors
   };
 };
 
 const mapDispatchToProps = {
+  getGenres,
+  getAuthors,
   getBook,
   updateFormData,
   updateFormErrors,

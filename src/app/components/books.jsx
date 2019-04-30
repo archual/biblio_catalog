@@ -5,11 +5,9 @@ import BooksTable from "./booksTable";
 import ListGroup from "./common/listGroup";
 import Pagination from "./common/pagination";
 import SearchBox from "./common/searchBox";
-// import { getBooks } from "../services/fakeBookService";
-import { getGenres } from "../services/fakeGenreService";
 import { paginate } from "../utils/paginate";
 import { getBooks } from "../actions/booksActions";
-import { setGenres, setSelectedGenre } from "../actions/genresActions";
+import { getGenres, setSelectedGenre } from "../actions/genresActions";
 import {
   setSortColumn,
   setCurrentPage,
@@ -22,10 +20,8 @@ const allGenres = { _id: "", name: "All Genres" };
 
 class Books extends Component {
   componentDidMount() {
-    const genres = [{ _id: "", name: "All Genres" }, ...getGenres()];
+    this.props.getGenres();
     this.props.getBooks();
-
-    this.props.setGenres(genres);
   }
 
   handleDelete = book => {
@@ -91,6 +87,8 @@ class Books extends Component {
       selectedGenre
     } = this.props;
 
+    const withAllGenres = [{ _id: "", name: "All Genres" }, ...genres];
+
     if (count === 0) return <p>There are no Books in the database.</p>;
 
     const { totalCount, data: books } = this.getPagedData();
@@ -99,7 +97,7 @@ class Books extends Component {
       <div className="row">
         <div className="col-3">
           <ListGroup
-            items={genres}
+            items={withAllGenres}
             selectedItem={selectedGenre}
             onItemSelect={this.handleGenreSelect}
           />
@@ -107,8 +105,10 @@ class Books extends Component {
         <div className="col">
           <p>Showing {totalCount} books in the database.</p>
           <div className="form-row align-items-center">
-            <SearchBox value={searchQuery} onChange={this.handleSearch} />
-            <Link className="btn btn-primary" to="/books/new">
+            <div className="col">
+              <SearchBox value={searchQuery} onChange={this.handleSearch} />
+            </div>
+            <Link className="btn btn-primary col-md-3" to="/books/new">
               Add new
             </Link>
           </div>
@@ -150,7 +150,7 @@ const mapDispatchToProps = {
   getBooks,
   setSortColumn,
   setCurrentPage,
-  setGenres,
+  getGenres,
   setSelectedGenre,
   setSearchQuery
 };

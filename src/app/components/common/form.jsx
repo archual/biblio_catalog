@@ -2,15 +2,10 @@ import React, { Component } from "react";
 import Joi from "joi-browser";
 import Input from "./input";
 import Select from "./select";
-import SelectOrAdd from "./selectOrAdd";
+import MultiSelect from "./multiSelect";
 import Dropzone from "./dropZone";
 
 class Form extends Component {
-  // state = {
-  //   data: {},
-  //   errors: {}
-  // };
-
   validate = () => {
     const options = { abortEarly: false };
     const { error } = Joi.validate(this.props.data, this.schema, options);
@@ -42,17 +37,39 @@ class Form extends Component {
 
   handleChange = ({ currentTarget: input }) => {
     const errors = { ...this.props.errors };
-    const errorMessage = this.validateProperty(input);
-    if (errorMessage) errors[input.name] = errorMessage;
-    else delete errors[input.name];
+    const multiple = input.multiple;
+    let errorMessage = "";
+
+    const updatedInput = {
+      name: input.name,
+      value: multiple ? this._getMultiselectValues(input) : input.value
+    };
+
+    errorMessage = this.validateProperty(updatedInput);
+
+    if (errorMessage) {
+      errors[input.name] = errorMessage;
+    } else {
+      delete errors[input.name];
+    }
 
     const data = { ...this.props.data };
-    data[input.name] = input.value;
-
-    // this.setState({ data, errors });
+    data[input.name] = updatedInput.value;
 
     this.doUpdateData(data);
     this.doUpdateErrors(errors || {});
+  };
+
+  _getMultiselectValues = select => {
+    const options = select.options;
+
+    const selectedOptions = Array.from(options).filter(option => {
+      return option.selected;
+    });
+
+    const selectedValues = selectedOptions.map(option => option.value);
+
+    return selectedValues;
   };
 
   renderButton(label) {
@@ -63,7 +80,7 @@ class Form extends Component {
     );
   }
 
-  renderSelect(name, label, options) {
+  renderSelect(name, label, options, multiple, size) {
     const { data, errors } = this.props;
 
     return (
@@ -72,22 +89,25 @@ class Form extends Component {
         value={data[name]}
         label={label}
         options={options}
+        nultiple={multiple}
+        size={size}
         onChange={this.handleChange}
         error={errors[name]}
       />
     );
   }
 
-  renderSelectOrAdd(name, label, options) {
+  renderMultiSelect(name, label, options, size) {
     const { data, errors } = this.props;
 
     return (
-      <SelectOrAdd
+      <MultiSelect
         name={name}
         value={data[name]}
         label={label}
         options={options}
-        handleChange={this.handleChange}
+        size={size}
+        onChange={this.handleChange}
         error={errors[name]}
       />
     );

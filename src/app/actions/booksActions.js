@@ -75,7 +75,7 @@ export function setFormData(book) {
       title: book.title,
       genreId: book.genre._id,
       image: book.image,
-      authors: book.authors
+      authors: book.authors.map(author => author._id)
     };
     dispatch(updateFormData(data));
   };
@@ -97,19 +97,19 @@ export function updateFormErrors(errors) {
 
 export function request() {
   return {
-    type: types.SAVE_BOOK_REQUEST
+    type: types.BOOK_REQUEST
   };
 }
 
 export function success() {
   return {
-    type: types.SAVE_BOOK_SUCCESS
+    type: types.BOOK_SUCCESS
   };
 }
 
 export function failure(error) {
   return {
-    type: types.SAVE_BOOK_FAILURE,
+    type: types.BOOK_FAILURE,
     payload: error
   };
 }

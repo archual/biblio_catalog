@@ -1,4 +1,5 @@
 import React from "react";
+import classNames from "classnames";
 
 const ListGroup = ({
   items,
@@ -13,11 +14,9 @@ const ListGroup = ({
         <li
           onClick={() => onItemSelect(item)}
           key={item[valueProperty]}
-          className={
-            selectedItem && item._id === selectedItem._id
-              ? "list-group-item active"
-              : "list-group-item"
-          }
+          className={classNames("list-group-item", "clickable", {
+            active: selectedItem && item._id === selectedItem._id
+          })}
         >
           {item[textProperty]}
         </li>

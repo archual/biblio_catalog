@@ -25,21 +25,21 @@ export default function authorsReducer(state = authorsInitialState, action) {
         }
       });
 
-    case types.SAVE_AUTHOR_REQUEST:
+    case types.AUTHOR_REQUEST:
       return update(state, {
         loading: {
           $set: true
         }
       });
 
-    case types.SAVE_AUTHOR_SUCCESS:
+    case types.AUTHOR_SUCCESS:
       return update(state, {
         loading: {
           $set: false
         }
       });
 
-    case types.SAVE_AUTHOR_FAILURE:
+    case types.AUTHOR_FAILURE:
       return update(state, {
         loading: {
           $set: false

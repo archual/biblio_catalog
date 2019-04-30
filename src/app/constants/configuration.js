@@ -7,7 +7,8 @@ export const booksInitialState = {
     image: "",
     authors: {}
   },
-  errors: {}
+  errors: {},
+  loading: false
 };
 
 export const tableInitialState = {
@@ -19,7 +20,8 @@ export const tableInitialState = {
 
 export const genresInitialState = {
   genres: [],
-  selectedGenre: { _id: "", name: "All Genres" }
+  selectedGenre: { _id: "", name: "All Genres" },
+  loading: false
 };
 
 export const authorsInitialState = {

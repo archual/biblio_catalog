@@ -25,21 +25,21 @@ export default function booksReducer(state = booksInitialState, action) {
         }
       });
 
-    case types.SAVE_BOOK_REQUEST:
+    case types.BOOK_REQUEST:
       return update(state, {
         loading: {
           $set: true
         }
       });
 
-    case types.SAVE_BOOK_SUCCESS:
+    case types.BOOK_SUCCESS:
       return update(state, {
         loading: {
           $set: false
         }
       });
 
-    case types.SAVE_BOOK_FAILURE:
+    case types.BOOK_FAILURE:
       return update(state, {
         loading: {
           $set: false

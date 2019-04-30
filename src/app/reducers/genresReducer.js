@@ -17,6 +17,30 @@ export default function booksReducer(state = genresInitialState, action) {
           $set: action.payload
         }
       });
+
+    case types.GENRE_REQUEST:
+      return update(state, {
+        loading: {
+          $set: true
+        }
+      });
+
+    case types.GENRE_SUCCESS:
+      return update(state, {
+        loading: {
+          $set: false
+        }
+      });
+
+    case types.GENRE_FAILURE:
+      return update(state, {
+        loading: {
+          $set: false
+        },
+        error: {
+          $set: action.payload
+        }
+      });
     default:
       return state;
   }
