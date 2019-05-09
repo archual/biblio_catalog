@@ -7,6 +7,7 @@ import { getAuthors } from "../actions/authorsActions";
 
 import {
   getBook,
+  setFormData,
   updateFormData,
   updateFormErrors,
   saveBook
@@ -14,7 +15,7 @@ import {
 
 class BookForm extends Form {
   schema = {
-    _id: Joi.string(),
+    _id: Joi.string().empty(""),
     title: Joi.string()
       .min(3)
       .max(30)
@@ -35,7 +36,10 @@ class BookForm extends Form {
     this.props.getAuthors();
 
     const bookId = this.props.match.params.id;
-    if (bookId === "new") return;
+    if (bookId === "new") {
+      this.props.setFormData({});
+      return;
+    }
 
     this.props.getBook(bookId);
   }
@@ -126,6 +130,7 @@ const mapDispatchToProps = {
   getGenres,
   getAuthors,
   getBook,
+  setFormData,
   updateFormData,
   updateFormErrors,
   saveBook

@@ -11,7 +11,7 @@ import {
 
 class AuthorForm extends Form {
   schema = {
-    _id: Joi.string(),
+    _id: Joi.string().empty(""),
     name: Joi.string()
       .min(3)
       .max(20)
@@ -49,8 +49,8 @@ class AuthorForm extends Form {
       <div>
         <h1>Edit author: {author.title}</h1>
         <form onSubmit={this.handleSubmit}>
-          {this.renderInput("name", "Name")}
-          {this.renderInput("surname", "Surname")}
+          {this.renderInput("name", "First name")}
+          {this.renderInput("surname", "Last name")}
           {this.renderButton("Save")}
         </form>
       </div>

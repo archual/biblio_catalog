@@ -4,6 +4,7 @@ import {
   getBooks as getBooksFake,
   saveBook as saveBookFake
 } from "../services/fakeBookService";
+import history from "../utils/history";
 
 export function getBooks() {
   return dispatch => {
@@ -60,7 +61,7 @@ export function getBook(bookId) {
 
       if (!book) {
         dispatch(failure("not found"));
-        return this.props.history.replace("/not-found");
+        return history.push("/not-found");
       }
       dispatch(success);
       dispatch(setFormData(book));
@@ -71,11 +72,15 @@ export function getBook(bookId) {
 export function setFormData(book) {
   return dispatch => {
     const data = {
-      _id: book._id,
-      title: book.title,
-      genreId: book.genre._id,
-      image: book.image,
-      authors: book.authors.map(author => author._id)
+      _id: book._id || "",
+      title: book.title || "",
+      genreId: (book.genre && book.genre._id) || "",
+      image: book.image || "",
+      authors:
+        (book.authors &&
+          book.authors.length &&
+          book.authors.map(author => author._id)) ||
+        []
     };
     dispatch(updateFormData(data));
   };

@@ -1,4 +1,5 @@
 import * as genresAPI from "./fakeGenreService";
+import * as authorsAPI from "./fakeAuthorService";
 
 const books = [
   {
@@ -151,16 +152,22 @@ export function getBooks() {
 }
 
 export function getBook(id) {
-  return books.find(m => m._id === id);
+  return books.find(book => book._id === id);
 }
 
-export function saveBook(book) {
-  let bookInDb = books.find(m => m._id === book._id) || {};
-  bookInDb.title = book.title;
-  bookInDb.genre = genresAPI.genres.find(g => g._id === book.genreId);
+export function saveBook(bookData) {
+  let bookInDb = books.find(book => book._id === bookData._id) || {};
+  bookInDb.title = bookData.title;
+  bookInDb.image = bookData.image;
+  bookInDb.genre = genresAPI.genres.find(
+    genre => genre._id === bookData.genreId
+  );
+  bookInDb.authors = authorsAPI.authors.filter(author =>
+    bookData.authors.includes(author._id)
+  );
 
   if (!bookInDb._id) {
-    bookInDb._id = Date.now();
+    bookInDb._id = `${Date.now()}`;
     books.push(bookInDb);
   }
 
