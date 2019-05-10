@@ -6,22 +6,11 @@ export const isbnJoi = Joi.extend(joi => ({
   language: {
     valid: "needs to be a valid ISBN number"
   },
-  // pre(value, state, options) {
-  //     if (options.convert && this._flags.round) {
-  //         return Math.round(value); // Change the value
-  //     }
-
-  //     return value; // Keep the value as it was
-  // },
   rules: [
     {
       name: "valid",
-      setup(params) {
-        // this._flags.round = true; // Set a flag for later use
-      },
       validate(params, value, state, options) {
         if (value.length !== 10 && value.length !== 13) {
-          // Generate an error, state and options need to be passed
           return this.createError("isbn.valid", { v: value }, state, options);
         }
 
@@ -53,7 +42,7 @@ export const isbnJoi = Joi.extend(joi => ({
           }
         }
 
-        return value; // Everything is OK
+        return value;
       }
     }
   ]
