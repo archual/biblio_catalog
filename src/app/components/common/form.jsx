@@ -58,6 +58,12 @@ class Form extends Component {
     this.doUpdateErrors(errors || {});
   };
 
+  handleRemoveImage = name => {
+    const data = { ...this.props.data };
+    data[name] = "";
+    this.doUpdateData(data);
+  };
+
   _getMultiselectValues = select => {
     const options = select.options;
 
@@ -70,9 +76,17 @@ class Form extends Component {
     return selectedValues;
   };
 
-  renderButton(label) {
+  renderSubmitButton(label) {
     return (
       <button disabled={this.validate()} className="btn btn-primary">
+        {label}
+      </button>
+    );
+  }
+
+  renderSimpleButton(label, handler) {
+    return (
+      <button className="btn btn-primary" onClick={handler}>
         {label}
       </button>
     );
@@ -135,17 +149,26 @@ class Form extends Component {
     handleUploadError,
     handleThumbnailCreated
   ) {
+    const { data, errors } = this.props;
+
     return (
       <React.Fragment>
         <label>{label}</label>
-        <Dropzone
-          fieldName={name}
-          apiUrl={apiUrl}
-          handleAddFile={handleAddFile}
-          handleUploaded={handleUploaded}
-          handleError={handleUploadError}
-          handleThumbnailCreated={handleThumbnailCreated}
-        />
+        {data[name] ? (
+          <div>
+            <img src={data[name]} alt="" />
+            <span onClick={() => this.handleRemoveImage(name)}>remove</span>
+          </div>
+        ) : (
+          <Dropzone
+            fieldName={name}
+            apiUrl={apiUrl}
+            handleAddFile={handleAddFile}
+            handleUploaded={handleUploaded}
+            handleError={handleUploadError}
+            handleThumbnailCreated={handleThumbnailCreated}
+          />
+        )}
       </React.Fragment>
     );
   }

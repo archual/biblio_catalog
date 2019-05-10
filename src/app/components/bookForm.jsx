@@ -24,7 +24,9 @@ class BookForm extends Form {
     genreId: Joi.string()
       .required()
       .label("Genre"),
-    image: Joi.any().label("Image"),
+    image: Joi.string()
+      .empty("")
+      .label("Image"),
     authors: Joi.array()
       .min(1)
       .required()
@@ -36,6 +38,13 @@ class BookForm extends Form {
     this.props.getAuthors();
 
     const bookId = this.props.match.params.id;
+    const params = new URLSearchParams(this.props.location.search);
+    const authorAdded = params.get("authorAdded");
+
+    if (authorAdded) {
+      return;
+    }
+
     if (bookId === "new") {
       this.props.setFormData({});
       return;
@@ -71,17 +80,29 @@ class BookForm extends Form {
   };
 
   handleThumbnailCreated = file => {
+    const input = {
+      name: "image",
+      value: file.src
+    };
+
+    this.handleChange({ currentTarget: input });
     console.log("file handleThumbnailCreated", file);
   };
 
-  _getAuthorsOptions(authors) {
+  _getAuthorsOptions = authors => {
     return authors.map(author => {
       return {
         _id: author._id,
         name: `${author.name} ${author.surname}`
       };
     });
-  }
+  };
+
+  handleAddAuthor = e => {
+    e.preventDefault();
+
+    this.props.history.push(`/authors/new?redirectUrl=${this.props.match.url}`);
+  };
 
   render() {
     const { data: book } = this.props;
@@ -106,7 +127,8 @@ class BookForm extends Form {
             this._getAuthorsOptions(this.props.authors),
             6
           )}
-          {this.renderButton("Save")}
+          {this.renderSimpleButton("Add Author", this.handleAddAuthor)}
+          {this.renderSubmitButton("Save")}
         </form>
       </div>
     );

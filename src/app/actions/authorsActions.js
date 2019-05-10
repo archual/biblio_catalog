@@ -48,7 +48,6 @@ export function saveAuthor(author) {
     setTimeout(() => {
       saveAuthorFake(author);
       dispatch(success);
-      history.push("/authors");
     }, 500);
   };
 }
@@ -74,9 +73,9 @@ export function getAuthor(authorId) {
 export function setFormData(author) {
   return dispatch => {
     const data = {
-      _id: author._id,
-      name: author.name,
-      surname: author.surname
+      _id: author._id || "",
+      name: author.name || "",
+      surname: author.surname || ""
     };
     dispatch(updateFormData(data));
   };

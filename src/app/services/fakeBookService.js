@@ -162,10 +162,13 @@ export function saveBook(bookData) {
   bookInDb.genre = genresAPI.genres.find(
     genre => genre._id === bookData.genreId
   );
+
+  // TODO: Author doesn't save....
   bookInDb.authors = authorsAPI.authors.filter(author =>
     bookData.authors.includes(author._id)
   );
 
+  debugger;
   if (!bookInDb._id) {
     bookInDb._id = `${Date.now()}`;
     books.push(bookInDb);
@@ -175,7 +178,7 @@ export function saveBook(bookData) {
 }
 
 export function deleteBook(id) {
-  let bookInDb = books.find(m => m._id === id);
+  let bookInDb = books.find(book => book._id === id);
   books.splice(books.indexOf(bookInDb), 1);
   return bookInDb;
 }

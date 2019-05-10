@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import {
   getAuthor,
   updateFormData,
+  setFormData,
   updateFormErrors,
   saveAuthor
 } from "../actions/authorsActions";
@@ -26,7 +27,11 @@ class AuthorForm extends Form {
 
   componentDidMount() {
     const authorId = this.props.match.params.id;
-    if (authorId === "new") return;
+
+    if (authorId === "new") {
+      this.props.setFormData({});
+      return;
+    }
 
     this.props.getAuthor(authorId);
   }
@@ -41,6 +46,15 @@ class AuthorForm extends Form {
 
   doSubmit = () => {
     this.props.saveAuthor(this.props.data);
+
+    const params = new URLSearchParams(this.props.location.search);
+    const redirectUrl = params.get("redirectUrl");
+
+    if (redirectUrl) {
+      this.props.history.push(`${redirectUrl}?authorAdded=true`);
+    } else {
+      this.props.history.push("/authors");
+    }
   };
 
   render() {
@@ -51,7 +65,7 @@ class AuthorForm extends Form {
         <form onSubmit={this.handleSubmit}>
           {this.renderInput("name", "First name")}
           {this.renderInput("surname", "Last name")}
-          {this.renderButton("Save")}
+          {this.renderSubmitButton("Save")}
         </form>
       </div>
     );
@@ -69,6 +83,7 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = {
   getAuthor,
+  setFormData,
   updateFormData,
   updateFormErrors,
   saveAuthor

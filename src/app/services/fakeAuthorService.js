@@ -14,16 +14,16 @@ export function getAuthors() {
 }
 
 export function getAuthor(id) {
-  return authors.find(m => m._id === id);
+  return authors.find(author => author._id === id);
 }
 
-export function saveAuthor(author) {
-  let authorInDb = authors.find(m => m._id === author._id) || {};
-  authorInDb.name = author.name;
-  authorInDb.surname = author.surname;
+export function saveAuthor(authorData) {
+  let authorInDb = authors.find(author => author._id === authorData._id) || {};
+  authorInDb.name = authorData.name;
+  authorInDb.surname = authorData.surname;
 
   if (!authorInDb._id) {
-    authorInDb._id = Date.now();
+    authorInDb._id = `${Date.now()}`;
     authors.push(authorInDb);
   }
 
@@ -31,7 +31,7 @@ export function saveAuthor(author) {
 }
 
 export function deleteAuthor(id) {
-  let authorInDb = authors.find(m => m._id === id);
+  let authorInDb = authors.find(author => author._id === id);
   authors.splice(authors.indexOf(authorInDb), 1);
   return authorInDb;
 }
