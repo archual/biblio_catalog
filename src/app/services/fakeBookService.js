@@ -15,6 +15,7 @@ const books = [
       { _id: "5b21ca3eeb7f6fbccd471851", name: "Addy", surname: "Osmani" }
     ],
     published: "2014-12-14T00:00:00.000Z",
+    publishedYear: "2014",
     publisher: "No Starch Press",
     pages: 472,
     description:
@@ -31,6 +32,7 @@ const books = [
       { _id: "5b21ca3eeb7f6fbccd471851", name: "Addy", surname: "Osmani" }
     ],
     published: "2012-07-01T00:00:00.000Z",
+    publishedYear: "2012",
     publisher: "O'Reilly Media",
     pages: 254,
     description:
@@ -49,6 +51,7 @@ const books = [
       { _id: "5b21ca3eeb7f6fbccd471852", name: "Axel", surname: "Rauschmayer" }
     ],
     published: "2014-02-01T00:00:00.000Z",
+    publishedYear: "2014",
     publisher: "O'Reilly Media",
     pages: 460,
     description:
@@ -66,6 +69,7 @@ const books = [
       { _id: "5b21ca3eeb7f6fbccd471853", name: "Eric", surname: "Elliott" }
     ],
     published: "2014-07-01T00:00:00.000Z",
+    publishedYear: "2014",
     publisher: "O'Reilly Media",
     pages: 254,
     description:
@@ -82,6 +86,7 @@ const books = [
       { _id: "5b21ca3eeb7f6fbccd471854", name: "Nicholas", surname: "C. Zakas" }
     ],
     published: "2016-09-03T00:00:00.000Z",
+    publishedYear: "2016",
     publisher: "No Starch Press",
     pages: 352,
     description:
@@ -98,6 +103,7 @@ const books = [
       { _id: "5b21ca3eeb7f6fbccd471855", name: "Kyle", surname: "Simpson" }
     ],
     published: "2015-12-27T00:00:00.000Z",
+    publishedYear: "2015",
     publisher: "O'Reilly Media",
     pages: 278,
     description:
@@ -119,6 +125,7 @@ const books = [
       }
     ],
     published: "2013-08-02T00:00:00.000Z",
+    publishedYear: "2013",
     publisher: "O'Reilly Media",
     pages: 234,
     description:
@@ -139,6 +146,7 @@ const books = [
       }
     ],
     published: "2014-04-07T00:00:00.000Z",
+    publishedYear: "2014",
     publisher: "O'Reilly Media",
     pages: 538,
     description:
@@ -169,6 +177,9 @@ export function saveBook(bookData) {
 
   bookInDb.pages = bookData.pages;
   bookInDb.publisher = bookData.publisher;
+  bookInDb.published = bookData.published;
+  bookInDb.publishedYear = bookData.publishedYear;
+  bookInDb.isbn = bookData.isbn;
 
   if (!bookInDb._id) {
     bookInDb._id = `${Date.now()}`;

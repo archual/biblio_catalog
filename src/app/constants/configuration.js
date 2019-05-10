@@ -9,7 +9,8 @@ export const booksInitialState = {
     pages: 0,
     publisher: "",
     publishedYear: "",
-    published: ""
+    published: "",
+    isbn: ""
   },
   errors: {},
   loading: false

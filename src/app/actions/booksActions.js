@@ -87,7 +87,8 @@ export function setFormData(book) {
       pages: book.pages || 0,
       publisher: book.publisher || "",
       publishedYear: book.publishedYear || "",
-      published: published || ""
+      published: published || "",
+      isbn: book.isbn || ""
     };
     dispatch(updateFormData(data));
   };

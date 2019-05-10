@@ -1,5 +1,6 @@
 import React from "react";
 import Joi from "joi-browser";
+import { isbnJoi } from "../utils/isbnValidation";
 import Form from "./common/form";
 import { connect } from "react-redux";
 import { getGenres } from "../actions/genresActions";
@@ -45,7 +46,14 @@ class BookForm extends Form {
       .label("Year of published"),
     published: Joi.date()
       .min("01-01-1800")
-      .label("Publication date")
+      .label("Publication date"),
+    isbn: isbnJoi
+      .isbn()
+      .min(10)
+      .max(13)
+      .regex(/^[0-9]+$/, "numbers")
+      .valid()
+      .label("ISBN")
   };
 
   componentDidMount() {
@@ -150,6 +158,7 @@ class BookForm extends Form {
           {this.renderInput("publisher", "Publisher")}
           {this.renderInput("publishedYear", "Year of published")}
           {this.renderInput("published", "Publication date", "date")}
+          {this.renderInput("isbn", "ISBN")}
           {this.renderSubmitButton("Save")}
         </form>
       </div>
