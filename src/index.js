@@ -4,12 +4,14 @@ import { Router } from "react-router-dom";
 import { Provider } from "react-redux";
 import history from "./app/utils/history";
 import registerServiceWorker from "./registerServiceWorker";
-import configureStore from "./app/store/configureStore";
-import App from "./app/App";
-const store = configureStore();
-
+import $ from "jquery";
+import "bootstrap/dist/js/bootstrap.bundle.min";
 import "./scss/main.scss";
 import "./vendor/dropzone.min.css";
+import configureStore from "./app/store/configureStore";
+import App from "./app/App";
+
+const store = configureStore();
 
 ReactDOM.render(
   <Provider store={store}>

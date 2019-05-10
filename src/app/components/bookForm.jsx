@@ -30,7 +30,22 @@ class BookForm extends Form {
     authors: Joi.array()
       .min(1)
       .required()
-      .label("Authors")
+      .label("Authors"),
+    pages: Joi.number()
+      .min(1)
+      .max(1000)
+      .label("Number of pages"),
+    publisher: Joi.string()
+      .empty("")
+      .max(30)
+      .label("Publisher"),
+    publishedYear: Joi.number()
+      .min(1800)
+      .max(2100)
+      .label("Year of published"),
+    published: Joi.date()
+      .min("01-01-1800")
+      .label("Publication date")
   };
 
   componentDidMount() {
@@ -106,6 +121,7 @@ class BookForm extends Form {
 
   render() {
     const { data: book } = this.props;
+
     return (
       <div>
         <h1>Edit Book: {book.title}</h1>
@@ -121,13 +137,19 @@ class BookForm extends Form {
             this.handleThumbnailCreated
           )}
           {this.renderSelect("genreId", "Genre", this.props.genres)}
-          {this.renderMultiSelect(
-            "authors",
-            "Authors",
-            this._getAuthorsOptions(this.props.authors),
-            6
-          )}
-          {this.renderSimpleButton("Add Author", this.handleAddAuthor)}
+          <div>
+            {this.renderMultiSelect(
+              "authors",
+              "Authors",
+              this._getAuthorsOptions(this.props.authors),
+              6
+            )}
+            {this.renderSimpleButton("Add Author", this.handleAddAuthor)}
+          </div>
+          {this.renderInput("pages", "Number of pages")}
+          {this.renderInput("publisher", "Publisher")}
+          {this.renderInput("publishedYear", "Year of published")}
+          {this.renderInput("published", "Publication date", "date")}
           {this.renderSubmitButton("Save")}
         </form>
       </div>

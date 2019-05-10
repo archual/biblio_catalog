@@ -14,12 +14,10 @@ class AuthorForm extends Form {
   schema = {
     _id: Joi.string().empty(""),
     name: Joi.string()
-      .min(3)
       .max(20)
       .required()
       .label("First name"),
     surname: Joi.string()
-      .min(3)
       .max(20)
       .required()
       .label("Last name")

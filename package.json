@@ -40,6 +40,7 @@
     "joi-browser": "^13.4.0",
     "lodash": "^4.17.11",
     "mini-css-extract-plugin": "^0.6.0",
+    "moment": "^2.24.0",
     "node-sass": "^4.11.0",
     "postcss-clean": "^1.1.0",
     "postcss-loader": "^3.0.0",
@@ -59,6 +60,7 @@
     "bootstrap": "^4.3.1",
     "font-awesome": "^4.7.0",
     "history": "^4.9.0",
+    "jquery": "^3.4.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-dropzone-component": "^3.2.0"

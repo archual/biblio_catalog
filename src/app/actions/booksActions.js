@@ -1,4 +1,6 @@
 import * as types from "../constants/ActionTypes";
+import moment from "moment";
+
 import {
   getBook as getBookFake,
   getBooks as getBooksFake,
@@ -71,6 +73,7 @@ export function getBook(bookId) {
 
 export function setFormData(book) {
   return dispatch => {
+    const published = moment(book.published).format("YYYY-MM-DD");
     const data = {
       _id: book._id || "",
       title: book.title || "",
@@ -80,7 +83,11 @@ export function setFormData(book) {
         (book.authors &&
           book.authors.length &&
           book.authors.map(author => author._id)) ||
-        []
+        [],
+      pages: book.pages || 0,
+      publisher: book.publisher || "",
+      publishedYear: book.publishedYear || "",
+      published: published || ""
     };
     dispatch(updateFormData(data));
   };

@@ -163,12 +163,13 @@ export function saveBook(bookData) {
     genre => genre._id === bookData.genreId
   );
 
-  // TODO: Author doesn't save....
   bookInDb.authors = authorsAPI.authors.filter(author =>
     bookData.authors.includes(author._id)
   );
 
-  debugger;
+  bookInDb.pages = bookData.pages;
+  bookInDb.publisher = bookData.publisher;
+
   if (!bookInDb._id) {
     bookInDb._id = `${Date.now()}`;
     books.push(bookInDb);

@@ -95,7 +95,7 @@ class Books extends Component {
 
     return (
       <div className="row">
-        <div className="col-3">
+        <div className="col-lg-3">
           <ListGroup
             items={withAllGenres}
             selectedItem={selectedGenre}

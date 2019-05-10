@@ -5,7 +5,11 @@ export const booksInitialState = {
     title: "",
     genreId: {},
     image: "",
-    authors: {}
+    authors: [],
+    pages: 0,
+    publisher: "",
+    publishedYear: "",
+    published: ""
   },
   errors: {},
   loading: false
