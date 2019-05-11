@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import moment from "moment";
 import Table from "./common/table";
 
 class BooksTable extends Component {
@@ -17,6 +18,41 @@ class BooksTable extends Component {
       sorting: true
     },
     { path: "genre.name", label: "Genre" },
+    {
+      path: "publishedYear",
+      label: "Year of published",
+      sorting: true
+    },
+    {
+      path: "info",
+      label: "Book's info",
+      content: book => {
+        const authors = book.authors
+          .map(author => `${author.name} ${author.surname}`)
+          .join(", ");
+        const published = moment(book.published).format("YYYY-MM-DD");
+
+        return (
+          <React.Fragment>
+            <p>
+              <span className="title">Authors:</span> {authors}
+            </p>
+            <p>
+              <span className="title">Pages:</span> {book.pages}
+            </p>
+            <p>
+              <span className="title">Publisher:</span> {book.publisher}
+            </p>
+            <p>
+              <span className="title">Published:</span> {published}
+            </p>
+            <p>
+              <span className="title">ISBN:</span> {book.isbn}
+            </p>
+          </React.Fragment>
+        );
+      }
+    },
     {
       key: "delete",
       content: book => (

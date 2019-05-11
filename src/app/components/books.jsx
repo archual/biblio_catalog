@@ -87,7 +87,7 @@ class Books extends Component {
       selectedGenre
     } = this.props;
 
-    const withAllGenres = [{ _id: "", name: "All Genres" }, ...genres];
+    const withAllGenres = [allGenres, ...genres];
 
     if (count === 0) return <p>There are no Books in the database.</p>;
 
@@ -95,7 +95,7 @@ class Books extends Component {
 
     return (
       <div className="row">
-        <div className="col-lg-3">
+        <div className="col-lg-2">
           <ListGroup
             items={withAllGenres}
             selectedItem={selectedGenre}

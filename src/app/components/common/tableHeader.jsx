@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import classnames from "classnames";
 
 class TableHeader extends Component {
   sort = column => {
@@ -20,13 +19,32 @@ class TableHeader extends Component {
     this.props.onSort(sortColumn);
   };
 
+  handleClearSort = () => {
+    this.props.onSort("");
+  };
+
   renderSortIcon = column => {
     const { sortColumn } = this.props;
 
-    if (column.path !== sortColumn.path) return null;
-    if (sortColumn.order === "asc") return <i className="fa fa-sort-asc" />;
+    if (column.path !== sortColumn.path) {
+      return null;
+    }
+
+    if (sortColumn.order === "asc") {
+      return <i className="fa fa-sort-asc" />;
+    }
 
     return <i className="fa fa-sort-desc" />;
+  };
+
+  renderClearSortIcon = column => {
+    const { sortColumn } = this.props;
+
+    if (column.path !== sortColumn.path) {
+      return null;
+    }
+
+    return <i className="fa fa-ban pointer" onClick={this.handleClearSort} />;
   };
 
   render() {
@@ -34,12 +52,16 @@ class TableHeader extends Component {
       <thead>
         <tr>
           {this.props.columns.map(column => (
-            <th
-              className={column.sorting && "clickable"}
-              key={column.path || column.key}
-              onClick={() => this.sort(column)}
-            >
-              {column.label} {this.renderSortIcon(column)}
+            <th key={column.path || column.key}>
+              <span
+                className={column.sorting && "clickable"}
+                onClick={() => this.sort(column)}
+              >
+                {column.label}
+              </span>
+              &nbsp;
+              {this.renderSortIcon(column)}&nbsp;
+              {this.renderClearSortIcon(column)}
             </th>
           ))}
         </tr>

@@ -69,7 +69,6 @@ class BookForm extends Form {
     }
 
     if (bookId === "new") {
-      this.props.setFormData({});
       return;
     }
 
@@ -86,6 +85,7 @@ class BookForm extends Form {
 
   doSubmit = () => {
     this.props.saveBook(this.props.data);
+    this.props.setFormData({});
 
     this.props.history.push("/books");
   };
