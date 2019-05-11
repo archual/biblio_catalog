@@ -1,5 +1,15 @@
 table {
+  font-size: 0.875em;
+
   img {
     max-width: 200px;
+  }
+
+  p {
+    margin: 5px 0;
+  }
+
+  .title {
+    font-weight: bold;
   }
 }

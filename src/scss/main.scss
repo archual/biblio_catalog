@@ -2,6 +2,7 @@
 $fa-font-path: "~font-awesome/fonts";
 @import "~font-awesome/scss/font-awesome.scss";
 
+@import "./layout/header";
 @import "common";
 @import "table";
 @import "forms";
