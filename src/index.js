@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Router } from "react-router-dom";
+import { BrowserRouter, Router } from "react-router-dom";
 import { Provider } from "react-redux";
 import history from "./app/utils/history";
 import registerServiceWorker from "./registerServiceWorker";
@@ -15,9 +15,9 @@ const store = configureStore();
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={history}>
+    <BrowserRouter history={history} basename={process.env.PUBLIC_URL}>
       <App />
-    </Router>
+    </BrowserRouter>
   </Provider>,
   document.getElementById("catalog-app")
 );

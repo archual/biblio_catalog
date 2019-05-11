@@ -5,7 +5,8 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 
 var devFlagPlugin = new webpack.DefinePlugin({
-  DEV_ENV: JSON.stringify(JSON.parse(process.env.DEBUG || "false"))
+  DEV_ENV: JSON.stringify(JSON.parse(process.env.DEBUG || "false")),
+  "process.env.PUBLIC_URL": JSON.stringify("")
 });
 
 module.exports = {

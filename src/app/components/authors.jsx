@@ -5,7 +5,7 @@ import AuthorsTable from "./authorsTable";
 import Pagination from "./common/pagination";
 import SearchBox from "./common/searchBox";
 import { paginate } from "../utils/paginate";
-import { getAuthors } from "../actions/authorsActions";
+import { getAuthors, setAuthors } from "../actions/authorsActions";
 import {
   setSortColumn,
   setCurrentPage,
@@ -20,7 +20,7 @@ class Authors extends Component {
   }
 
   handleDelete = author => {
-    const authors = this.props.authors.filter(m => m._id !== author._id);
+    const authors = this.props.authors.filter(a => a._id !== author._id);
     this.props.setAuthors(authors);
   };
 
@@ -116,6 +116,7 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = {
   getAuthors,
+  setAuthors,
   setSortColumn,
   setCurrentPage,
   setSearchQuery
