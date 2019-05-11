@@ -54,6 +54,7 @@ class BooksTable extends Component {
       }
     },
     {
+      path: "delete",
       key: "delete",
       content: book => (
         <button

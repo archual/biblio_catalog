@@ -6,7 +6,7 @@ import ListGroup from "./common/listGroup";
 import Pagination from "./common/pagination";
 import SearchBox from "./common/searchBox";
 import { paginate } from "../utils/paginate";
-import { getBooks } from "../actions/booksActions";
+import { getBooks, setBooks } from "../actions/booksActions";
 import { getGenres, setSelectedGenre } from "../actions/genresActions";
 import {
   setSortColumn,
@@ -148,6 +148,7 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = {
   getBooks,
+  setBooks,
   setSortColumn,
   setCurrentPage,
   getGenres,
