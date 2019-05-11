@@ -5,8 +5,7 @@ import throttle from "lodash/throttle";
 import reducers from "../reducers";
 import { loadLocalState, saveLocalState } from "../utils/localStorage";
 
-// const persistedState = loadLocalState() || {};
-const persistedState = {};
+const persistedState = loadLocalState() || {};
 
 const composeEnhancers = DEV_ENV
   ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
