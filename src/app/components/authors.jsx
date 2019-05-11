@@ -76,8 +76,10 @@ class Authors extends Component {
         <div className="col">
           <p>Showing {totalCount} authors in the database.</p>
           <div className="form-row align-items-center">
-            <SearchBox value={searchQuery} onChange={this.handleSearch} />
-            <Link className="btn btn-primary" to="/authors/new">
+            <div className="col">
+              <SearchBox value={searchQuery} onChange={this.handleSearch} />
+            </div>
+            <Link className="btn btn-primary col-md-3" to="/authors/new">
               Add new
             </Link>
           </div>
